@@ -12,12 +12,12 @@ import java.util.Objects;
 
 @Getter
 @ToString(callSuper = true)
-@Entity
 @Table(indexes = {
         @Index(columnList = "content"),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
 })
+@Entity
 public class ArticleComment extends AuditingFields {
 
     @Id
