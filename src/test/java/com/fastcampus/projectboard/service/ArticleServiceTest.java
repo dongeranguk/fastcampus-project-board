@@ -235,7 +235,7 @@ class ArticleServiceTest {
     public void givenModifiedArticleInfo_whenUpdatingArticle_thenUpdatesArticle() {
         // Given
         Article article = createArticle();
-        ArticleDto dto = createArticleDto("새 타이틀", "새 내용");
+        ArticleDto dto = createArticleDto("새 타이틀", "새 내용 #springboot");
         Set<String> expectedHashtagNames = Set.of("springboot");
         Set<Hashtag> expectedHashtags = new HashSet<>();
 
@@ -259,7 +259,7 @@ class ArticleServiceTest {
         then(articleRepository).should().getReferenceById(dto.id());
         then(userAccountRepository).should().getReferenceById(dto.userAccountDto().userId());
         then(articleRepository).should().flush();
-        then(hashtagService).should().deleteHashtagWithoutArticles(any());
+        then(hashtagService).should(times(2)).deleteHashtagWithoutArticles(any());
         then(hashtagService).should().parseHashtagNames(dto.content());
         then(hashtagService).should().findHashtagsByNames(expectedHashtagNames);
     }
@@ -309,6 +309,7 @@ class ArticleServiceTest {
         Long articleId = 1L;
         String userId = "du";
 
+        given(articleRepository.getReferenceById(articleId)).willReturn(createArticle());
         willDoNothing().given(articleRepository).deleteByIdAndUserAccount_UserId(articleId, userId);
         willDoNothing().given(articleRepository).flush();
         willDoNothing().given(hashtagService).deleteHashtagWithoutArticles(any());
