@@ -15,7 +15,6 @@ public record ArticleWithCommentsDto(
         String title,
         String content,
         Set<HashtagDto> hashtagDtos,
-
         LocalDateTime createdAt,
         String createdBy,
         LocalDateTime modifiedAt,
