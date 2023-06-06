@@ -3,7 +3,6 @@ package com.fastcampus.projectboard.dto.response;
 import com.fastcampus.projectboard.dto.ArticleDto;
 import com.fastcampus.projectboard.dto.HashtagDto;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -16,7 +15,7 @@ public record ArticleResponse(
         LocalDateTime createdAt,
         String email,
         String nickname
-) implements Serializable {
+) {
 
     public static ArticleResponse of(Long id, String title, String content, Set<String> hashtags, LocalDateTime createdAt, String email, String nickname) {
         return new ArticleResponse(id, title, content, hashtags, createdAt, email, nickname);
