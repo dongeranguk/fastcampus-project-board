@@ -81,7 +81,7 @@ class ArticleCommentControllerTest {
         // When & Then
         mvc.perform(post("/comments/" + articleCommentId + "/delete")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                        .content(formDataEncoder.encode(Map.of(articleId, articleCommentId)))
+                        .content(formDataEncoder.encode(Map.of("articleId", articleId)))
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/articles/" + articleId))
